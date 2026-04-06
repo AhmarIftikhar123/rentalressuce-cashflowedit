@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base resets scoped to the audit app ─────────────────────────────────── */
+#react-root *,
+#react-root *::before,
+#react-root *::after {
+  box-sizing: border-box;
+}
+
+#react-root {
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Smooth focus ring for all interactive elements ──────────────────────── */
+#react-root button:focus-visible,
+#react-root input:focus-visible {
+  outline: 2px solid #C9972A;
+  outline-offset: 2px;
+}
+
+/* ── Remove Blocksy/WordPress default button styles inside the app ────────── */
+#react-root button {
+  border: none;
+  background: none;
+  font-family: inherit;
+}

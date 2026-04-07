@@ -19,7 +19,7 @@ export const PITI_OPTIONS = [
   { val: 1750,  label: '$1,500–$2,000' },
   { val: 2250,  label: '$2,000–$2,500' },
   { val: 2900,  label: '$2,500+' },
-  { val: 1500,  label: 'Not sure' },
+  { val: 'not-sure',  label: 'Not sure' },
 ];
 
 export const LOAN_OPTIONS = [
@@ -28,7 +28,7 @@ export const LOAN_OPTIONS = [
   { val: 250000,  label: '$200K–$300K' },
   { val: 400000,  label: '$300K–$500K' },
   { val: 600000,  label: '$500K+' },
-  { val: 250000,  label: 'Not sure' },
+  { val: 'not-sure',  label: 'Not sure' },
 ];
 
 export const GOAL_OPTIONS = [

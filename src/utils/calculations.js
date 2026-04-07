@@ -130,7 +130,11 @@ export function calcUpside( rents ) {
  * Call once with full context state → returns complete result object for Step 7.
  */
 export function runAuditCalc( auditState ) {
-  const { property, condition, piti, loanBalance } = auditState;
+  const { property, condition } = auditState;
+
+  // Handle 'not-sure' selections by falling back to V1 defaults
+  const piti        = auditState.piti === 'not-sure' ? 1500 : auditState.piti;
+  const loanBalance = auditState.loanBalance === 'not-sure' ? 250000 : auditState.loanBalance;
 
   const rents    = calcRentEstimates( property, condition );
   const cashflow = calcCashFlow( rents, piti );

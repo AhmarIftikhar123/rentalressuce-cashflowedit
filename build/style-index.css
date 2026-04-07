@@ -499,6 +499,9 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
+.fixed {
+  position: fixed;
+}
 .absolute {
   position: absolute;
 }
@@ -584,8 +587,14 @@ video {
 .ml-2 {
   margin-left: 0.5rem;
 }
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
 .mt-3 {
   margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
 }
 .mt-5 {
   margin-top: 1.25rem;
@@ -768,6 +777,9 @@ video {
 .flex-col {
   flex-direction: column;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 .items-start {
   align-items: flex-start;
 }
@@ -852,12 +864,13 @@ video {
 .border-t {
   border-top-width: 1px;
 }
-.border-none {
-  border-style: none;
-}
 .border-\[\#E9E5DB\] {
   --tw-border-opacity: 1;
   border-color: rgb(233 229 219 / var(--tw-border-opacity, 1));
+}
+.border-\[\#F0D98A\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(240 217 138 / var(--tw-border-opacity, 1));
 }
 .border-\[\#F0E6D2\] {
   --tw-border-opacity: 1;
@@ -890,6 +903,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(61 46 20 / var(--tw-bg-opacity, 1));
 }
+.bg-\[\#DCFCE7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
+}
 .bg-\[\#E1EFFE\] {
   --tw-bg-opacity: 1;
   background-color: rgb(225 239 254 / var(--tw-bg-opacity, 1));
@@ -897,6 +914,10 @@ video {
 .bg-\[\#F2EFE8\] {
   --tw-bg-opacity: 1;
   background-color: rgb(242 239 232 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#F3E8FF\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 232 255 / var(--tw-bg-opacity, 1));
 }
 .bg-\[\#F7F5F0\] {
   --tw-bg-opacity: 1;
@@ -1223,9 +1244,21 @@ video {
 .tracking-widest {
   letter-spacing: 0.1em;
 }
+.text-\[\#166534\] {
+  --tw-text-opacity: 1;
+  color: rgb(22 101 52 / var(--tw-text-opacity, 1));
+}
 .text-\[\#1E429F\] {
   --tw-text-opacity: 1;
   color: rgb(30 66 159 / var(--tw-text-opacity, 1));
+}
+.text-\[\#6B21A8\] {
+  --tw-text-opacity: 1;
+  color: rgb(107 33 168 / var(--tw-text-opacity, 1));
+}
+.text-\[\#7A5A10\] {
+  --tw-text-opacity: 1;
+  color: rgb(122 90 16 / var(--tw-text-opacity, 1));
 }
 .text-\[\#92400E\] {
   --tw-text-opacity: 1;
@@ -1258,6 +1291,9 @@ video {
 .text-brand-gold-light {
   --tw-text-opacity: 1;
   color: rgb(240 201 106 / var(--tw-text-opacity, 1));
+}
+.text-brand-gold\/60 {
+  color: rgb(201 151 42 / 0.6);
 }
 .text-white {
   --tw-text-opacity: 1;

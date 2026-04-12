@@ -1,7 +1,7 @@
-import { useState } from '@wordpress/element';
-import { useAudit } from '../context/AuditContext';
-import ButtonPrimary from '../components/ButtonPrimary';
-import { submitAudit } from '../utils/api';
+import { useState } from "@wordpress/element";
+import { useAudit } from "../context/AuditContext";
+import ButtonPrimary from "../components/ButtonPrimary";
+import { submitAudit } from "../utils/api";
 
 /**
  * Step 8 — Lead capture.
@@ -14,7 +14,13 @@ const FieldLabel = ({ children }) => (
   </label>
 );
 
-const TextInput = ({ type = 'text', value, onChange, placeholder, disabled }) => (
+const TextInput = ({
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  disabled,
+}) => (
   <input
     type={type}
     value={value}
@@ -29,8 +35,8 @@ const Step8_Capture = () => {
   const { state, update, goTo } = useAudit();
 
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError]           = useState('');
-  const [done, setDone]             = useState(false);
+  const [error, setError] = useState("");
+  const [done, setDone] = useState(false);
 
   const isValid =
     state.leadName.trim() &&
@@ -39,26 +45,27 @@ const Step8_Capture = () => {
 
   const handleSubmit = async () => {
     if (!isValid) return;
-    setError('');
+    setError("");
     setSubmitting(true);
 
     try {
       await submitAudit({
-        name:   state.leadName.trim(),
-        email:  state.leadEmail.trim(),
-        phone:  state.leadPhone.trim(),
+        name: state.leadName.trim(),
+        email: state.leadEmail.trim(),
+        phone: state.leadPhone.trim(),
         audit: {
           ...state.auditResults,
-          goal:       state.goal,
-          condition:  state.condition,
+          resultsUrl: state.resultsUrl ?? "",
+          goal: state.goal,
+          condition: state.condition,
           currentUse: state.currentUse,
-          address:    state.address,
-          property:   state.property,
+          address: state.address,
+          property: state.property,
         },
       });
       setDone(true);
     } catch (err) {
-      setError(err.message ?? 'Something went wrong. Please try again.');
+      setError(err.message ?? "Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -69,18 +76,32 @@ const Step8_Capture = () => {
     return (
       <div className="p-6 text-center py-12">
         <div className="w-14 h-14 rounded-full bg-audit-positive/10 flex items-center justify-center mx-auto mb-4 border-2 border-audit-positive/20">
-          <svg className="w-7 h-7 text-audit-positive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-7 h-7 text-audit-positive"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={3}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-brand-black mb-2">You're all set!</h2>
+        <h2 className="text-2xl font-bold text-brand-black mb-2">
+          You're all set!
+        </h2>
         <p className="text-sm text-audit-neutral mb-1">
           Your personalised Cashflow Audit is on its way to
         </p>
         <p className="text-sm font-semibold text-brand-black mb-6">
           {state.leadEmail}
         </p>
-        <p className="text-xs text-audit-neutral">Check your inbox within a few minutes.</p>
+        <p className="text-xs text-audit-neutral">
+          Check your inbox within a few minutes.
+        </p>
       </div>
     );
   }
@@ -105,7 +126,8 @@ const Step8_Capture = () => {
         Get your full strategy plan
       </h2>
       <p className="text-sm text-audit-neutral mb-6">
-        We'll send you a personalised execution roadmap — rental model, pricing, and exact next steps.
+        We'll send you a personalised execution roadmap — rental model, pricing,
+        and exact next steps.
       </p>
 
       <FieldLabel>Full name</FieldLabel>
@@ -143,7 +165,7 @@ const Step8_Capture = () => {
         disabled={!isValid || submitting}
         variant="gold"
       >
-        {submitting ? 'Sending…' : 'Send My Strategy Plan →'}
+        {submitting ? "Sending…" : "Send My Strategy Plan →"}
       </ButtonPrimary>
 
       <p className="text-center text-[11px] text-audit-neutral mt-3">

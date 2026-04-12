@@ -1,4 +1,10 @@
 <?php
+// ── Helper: Get results viewer page URL ───────────────────────────────────────
+function rental_audit_get_results_page_url() {
+    $page = get_page_by_path( 'rental-audit-results' );
+    return $page ? get_permalink( $page->ID ) : home_url( '/rental-audit-results/' );
+}
+
 // ── 1 & 2. Enqueue scripts ────────────────────────────────────────────────────
 add_action( 'wp_enqueue_scripts', function () {
 
@@ -13,8 +19,8 @@ add_action( 'wp_enqueue_scripts', function () {
     // Enqueue dashicons for the frontend
     wp_enqueue_style( 'dashicons' );
 
-    // Only load React app on the calculator page template
-    if ( ! is_page_template( 'page-calculator.php' ) ) {
+    // Only load React app on the calculator or results viewer page templates
+    if ( ! is_page_template( 'page-calculator.php' ) && ! is_page_template( 'page-results-viewer.php' ) ) {
         return;
     }
 
@@ -44,10 +50,13 @@ add_action( 'wp_enqueue_scripts', function () {
     );
 
     // Pass config to React via window.rentalAuditConfig
+    // This is the SINGLE source of truth — plugin no longer duplicates this.
     wp_localize_script( 'rental-audit-app', 'rentalAuditConfig', [
-        'restUrl' => rest_url( 'rental-audit/v1/' ),
-        'nonce'   => wp_create_nonce( 'wp_rest' ),
-        'siteUrl' => get_site_url(),
+        'restUrl'        => rest_url( 'rental-audit/v1/' ),
+        'nonce'          => wp_create_nonce( 'wp_rest' ),
+        'siteUrl'        => get_site_url(),
+        'isAdmin'        => current_user_can( 'manage_options' ),
+        'resultsPageUrl' => rental_audit_get_results_page_url(),
     ] );
 
 } );

@@ -1,0 +1,49 @@
+%% Rental Audit — System Architecture
+%% Last updated: 2026-04-13
+%%
+%% How it works:
+%%   - React app (blocksy-child/src) handles the 9-step audit form
+%%   - Plugin (rental-audit/) handles all server-side logic: RentCast API, FluentCRM, REST routes
+%%   - Theme (blocksy-child/) provides enqueue config, page templates, and email formatting
+%%   - The /submit route is owned SOLELY by the plugin
+%%   - Email functions live in theme's mailer.php but are called by the plugin
+
+flowchart LR
+    subgraph React["React App (blocksy-child/src)"]
+        A["Step0–Step6<br/>Audit Form"] --> B["Step7_Results<br/>Results Display"]
+        B --> C["Step8_Capture<br/>Lead Capture"]
+        C -->|"POST /submit"| D["api.js<br/>fetch wrapper"]
+        E["ResultsViewer.jsx<br/>Admin-only viewer"] -->|"decodes ?d= param"| B
+    end
+
+    subgraph Plugin["Plugin (rental-audit/)"]
+        D -->|"fetch"| F["class-rest-routes.php<br/>/lookup + /submit"]
+        F -->|"/lookup"| G["class-rentcast-api.php<br/>RentCast API proxy"]
+        F -->|"/submit"| H["class-fluentcrm-submit.php<br/>FluentCRM handler"]
+        H --> I["FluentCRM API<br/>custom_fields ✅<br/>auto-create lists/tags"]
+        H --> J["rental_audit_email_lead()"]
+        H --> K["rental_audit_email_admin()"]
+    end
+
+    subgraph Theme["Theme (blocksy-child/)"]
+        L["enqueue.php<br/>wp_localize_script<br/>rentalAuditConfig"] -->|"provides config to"| React
+        M["mailer.php<br/>Email formatting"]
+        J -.->|"function_exists() call"| M
+        K -.->|"function_exists() call"| M
+        N["page-calculator.php<br/>Calculator template"]
+        O["page-results-viewer.php<br/>Admin results template"]
+    end
+
+    subgraph WordPress["WordPress Core"]
+        P["WP REST API"]
+        Q["wp_mail()"]
+        M --> Q
+        F --> P
+    end
+
+    subgraph External["External Services"]
+        R["RentCast API<br/>rentcast.io"]
+        S["FluentCRM<br/>WP Plugin"]
+        G --> R
+        I --> S
+    end

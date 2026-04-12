@@ -1,5 +1,5 @@
-import { useAudit } from '../context/AuditContext';
-import { fmtMoney, fmtMonthly } from '../utils/calculations';
+import { useAudit } from "../context/AuditContext";
+import { fmtMoney, fmtMonthly } from "../utils/calculations";
 
 /**
  * Step 7 — Cashflow Audit Results.
@@ -11,7 +11,7 @@ import { fmtMoney, fmtMonthly } from '../utils/calculations';
  *  • "Optimized Cash Flow" highlight block shows STR/mo (best case)
  */
 
-const CardTitle = ( { title, icon, color = 'text-audit-neutral' } ) => (
+const CardTitle = ({ title, icon, color = "text-audit-neutral" }) => (
   <h3
     className={`text-[12px] font-black uppercase tracking-widest ${color} flex items-center gap-2 mb-6`}
   >
@@ -23,18 +23,38 @@ const CardTitle = ( { title, icon, color = 'text-audit-neutral' } ) => (
 );
 
 // Strategy badge pills
-const MtrTag  = () => <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#E1EFFE] text-[#1E429F] text-[8px] font-black uppercase tracking-wider rounded">Mid-term</span>;
-const StrTag  = () => <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#FEF3C7] text-[#92400E] text-[8px] font-black uppercase tracking-wider rounded">Short-term</span>;
-const Sec8Tag = () => <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#DCFCE7] text-[#166534] text-[8px] font-black uppercase tracking-wider rounded">Section 8</span>;
-const RoomTag = () => <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#F3E8FF] text-[#6B21A8] text-[8px] font-black uppercase tracking-wider rounded">By-the-Room</span>;
+const MtrTag = () => (
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#E1EFFE] text-[#1E429F] text-[8px] font-black uppercase tracking-wider rounded">
+    Mid-term
+  </span>
+);
+const StrTag = () => (
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#FEF3C7] text-[#92400E] text-[8px] font-black uppercase tracking-wider rounded">
+    Short-term
+  </span>
+);
+const Sec8Tag = () => (
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#DCFCE7] text-[#166534] text-[8px] font-black uppercase tracking-wider rounded">
+    Section 8
+  </span>
+);
+const RoomTag = () => (
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#F3E8FF] text-[#6B21A8] text-[8px] font-black uppercase tracking-wider rounded">
+    By-the-Room
+  </span>
+);
 
-const ValueBox = ( { label, value, tag = null, isRed = false } ) => (
+const ValueBox = ({ label, value, tag = null, isRed = false }) => (
   <div className="bg-white rounded-[16px] px-5 py-4 flex justify-between items-center shadow-sm border border-step-border/40 mb-3">
     <div className="flex items-center flex-wrap gap-1">
       <span className="text-[13px] font-bold text-brand-black">{label}</span>
       {tag}
     </div>
-    <span className={`text-[17px] font-black ${isRed ? 'text-audit-negative' : 'text-brand-black'}`}>
+    <span
+      className={`text-[17px] font-black ${
+        isRed ? "text-audit-negative" : "text-brand-black"
+      }`}
+    >
       {value}
     </span>
   </div>
@@ -44,7 +64,7 @@ const Step7_Results = () => {
   const { state, goTo } = useAudit();
   const r = state.auditResults;
 
-  if ( ! r ) {
+  if (!r) {
     return (
       <div className="p-12 text-center text-audit-neutral text-sm animate-pulse font-bold tracking-widest uppercase">
         Fetching Analysis Results…
@@ -54,7 +74,6 @@ const Step7_Results = () => {
 
   return (
     <div className="bg-[#F7F5F0]">
-
       {/* 1. TOP HERO BANNER */}
       <div className="px-6 pt-6 md:px-10 md:pt-10">
         <div className="bg-gradient-to-br from-[#4D545E] to-[#2D3540] rounded-[24px] px-10 py-12 md:py-16 shadow-2xl relative overflow-hidden text-center md:text-left">
@@ -66,7 +85,7 @@ const Step7_Results = () => {
               Optimization Result
             </p>
             <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-5 max-w-2xl">
-              <span className="text-brand-gold">+{fmtMonthly( r.upside )}</span>{' '}
+              <span className="text-brand-gold">+{fmtMonthly(r.upside)}</span>{" "}
               potential monthly income you may be leaving on the table
             </h2>
             <p className="text-sm md:text-base text-white/50 max-w-xl leading-relaxed font-medium">
@@ -85,13 +104,12 @@ const Step7_Results = () => {
 
       {/* 2. PERFORMANCE GRID */}
       <div className="p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-
         {/* Left — Current Performance */}
         <div className="bg-white/40 p-8 rounded-[32px] border border-white/60 shadow-sm">
           <CardTitle title="Current Performance" icon="dashicons-chart-line" />
 
-          <ValueBox label="Market Rent (LTR)" value={fmtMonthly( r.baseLTR )} />
-          <ValueBox label="PITI"               value={fmtMonthly( r.piti )}    isRed />
+          <ValueBox label="Market Rent (LTR)" value={fmtMonthly(r.baseLTR)} />
+          <ValueBox label="PITI" value={fmtMonthly(r.piti)} isRed />
 
           {/* Net highlight */}
           <div className="bg-[#F9F8F1] rounded-[24px] p-6 border border-[#E9E5DB] mt-8 flex flex-col items-center text-center">
@@ -102,7 +120,7 @@ const Step7_Results = () => {
               Monthly Net (LTR)
             </span>
             <span className="text-4xl font-black text-brand-gold tracking-tight">
-              {fmtMonthly( r.ltr_cf )}
+              {fmtMonthly(r.ltr_cf)}
             </span>
           </div>
         </div>
@@ -115,10 +133,26 @@ const Step7_Results = () => {
             color="text-brand-gold"
           />
 
-          <ValueBox label="MTR Income"         value={fmtMonthly( r.baseMTR  )} tag={<MtrTag />}  />
-          <ValueBox label="STR Income"         value={fmtMonthly( r.baseSTR  )} tag={<StrTag />}  />
-          <ValueBox label="Section 8"          value={fmtMonthly( r.baseSec8 )} tag={<Sec8Tag />} />
-          <ValueBox label="By-the-Room"        value={fmtMonthly( r.baseRoom )} tag={<RoomTag />} />
+          <ValueBox
+            label="MTR Income"
+            value={fmtMonthly(r.baseMTR)}
+            tag={<MtrTag />}
+          />
+          <ValueBox
+            label="STR Income"
+            value={fmtMonthly(r.baseSTR)}
+            tag={<StrTag />}
+          />
+          <ValueBox
+            label="Section 8"
+            value={fmtMonthly(r.baseSec8)}
+            tag={<Sec8Tag />}
+          />
+          <ValueBox
+            label="By-the-Room"
+            value={fmtMonthly(r.baseRoom)}
+            tag={<RoomTag />}
+          />
 
           {/* Best-case cash flow highlight */}
           <div className="bg-gradient-to-r from-[#8B6B23] to-[#D5A737] rounded-[24px] p-6 mt-6 flex flex-col items-center text-center shadow-xl shadow-brand-gold/20">
@@ -129,7 +163,7 @@ const Step7_Results = () => {
               Best-Case Cash Flow (STR)
             </span>
             <span className="text-4xl font-black text-white tracking-tight">
-              {fmtMonthly( r.str_cf )}
+              {fmtMonthly(r.str_cf)}
             </span>
           </div>
         </div>
@@ -138,7 +172,6 @@ const Step7_Results = () => {
       {/* 3. EQUITY FOOTER */}
       <div className="bg-white px-8 py-10 md:px-16 md:py-14 border-t border-step-border/50">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
-
           <div className="w-full mb-10">
             <div className="flex justify-between items-end mb-4">
               <div className="flex items-center gap-2">
@@ -154,7 +187,7 @@ const Step7_Results = () => {
                   Estimated Equity
                 </span>
                 <span className="text-3xl md:text-5xl font-black text-brand-gold tracking-tight">
-                  {fmtMoney( r.equity )}
+                  {fmtMoney(r.equity)}
                 </span>
               </div>
             </div>
@@ -162,7 +195,12 @@ const Step7_Results = () => {
             <div className="h-4 bg-[#F2EFE8] rounded-full overflow-hidden w-full mb-3 shadow-inner">
               <div
                 className="h-full bg-brand-gold rounded-full transition-all duration-1000 ease-in-out"
-                style={{ width: `${Math.max( 2, Math.min( 100, Math.abs( r.equityPct ) ) )}%` }}
+                style={{
+                  width: `${Math.max(
+                    2,
+                    Math.min(100, Math.abs(r.equityPct)),
+                  )}%`,
+                }}
               />
             </div>
 
@@ -174,7 +212,8 @@ const Step7_Results = () => {
           </div>
 
           <button
-            onClick={() => goTo( 8 )}
+            data-viewer-hide
+            onClick={() => goTo(8)}
             className="w-full md:w-auto bg-[#3D2E14] text-[13px] font-black uppercase tracking-[0.15em] py-5 px-12 rounded-full shadow-2xl hover:bg-brand-black transition-all hover:scale-[1.05] flex items-center justify-center gap-3 active:scale-95"
           >
             Get My Full Strategy Plan <span className="text-xl">→</span>

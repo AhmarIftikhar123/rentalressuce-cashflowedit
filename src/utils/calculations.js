@@ -5,8 +5,8 @@
  *
  * V1 Multiplier logic (client-specified, fixed for V1):
  *   LTR  = RentCast estimated rent × condition multiplier
- *   MTR  = LTR × 1.25
- *   STR  = LTR × 2.0
+ *   MTR  = LTR × 1.5
+ *   STR  = LTR × 1.8
  *   Sec8 = LTR × 1.1
  *   Room = LTR × 1.3
  *
@@ -82,8 +82,8 @@ export function calcRentEstimates( property, condition ) {
   const baseLTR = Math.round( rawLTR / 50 ) * 50;
 
   // ── Apply client-specified V1 multipliers ─────────────────────────────────
-  const baseMTR  = Math.round( ( baseLTR * 1.25 ) / 50 ) * 50;  // Mid-term
-  const baseSTR  = Math.round( ( baseLTR * 2.0  ) / 50 ) * 50;  // Short-term
+  const baseMTR  = Math.round( ( baseLTR * 1.5 ) / 50 ) * 50;  // Mid-term
+  const baseSTR  = Math.round( ( baseLTR * 1.8  ) / 50 ) * 50;  // Short-term
   const baseSec8 = Math.round( ( baseLTR * 1.1  ) / 50 ) * 50;  // Section 8
   const baseRoom = Math.round( ( baseLTR * 1.3  ) / 50 ) * 50;  // By-the-room
 
@@ -130,11 +130,7 @@ export function calcUpside( rents ) {
  * Call once with full context state → returns complete result object for Step 7.
  */
 export function runAuditCalc( auditState ) {
-  const { property, condition } = auditState;
-
-  // Handle 'not-sure' selections by falling back to V1 defaults
-  const piti        = auditState.piti === 'not-sure' ? 1500 : auditState.piti;
-  const loanBalance = auditState.loanBalance === 'not-sure' ? 250000 : auditState.loanBalance;
+  const { property, condition, piti, loanBalance } = auditState;
 
   const rents    = calcRentEstimates( property, condition );
   const cashflow = calcCashFlow( rents, piti );

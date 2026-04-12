@@ -1,5 +1,6 @@
 import { createRoot } from '@wordpress/element';
 import App from './App';
+import ResultsViewer from './steps/ResultsViewer';
 import './style.css';
 
 /**
@@ -14,3 +15,6 @@ if (rootElement) {
   const root = createRoot(rootElement);
   root.render(<App />);
 }
+// Mount admin results viewer (only present on results-viewer page)
+const viewerRoot = document.getElementById('rental-audit-results-viewer');
+if (viewerRoot) createRoot(viewerRoot).render(<ResultsViewer />);

@@ -10,10 +10,7 @@ define( 'BLOCKSY_CHILD_INC_DIR', get_stylesheet_directory() . '/inc' );
 
 $files_to_include = [
     '/enqueue.php',
-    '/api.php',
-    '/services/fluentcrm.php',
     '/services/mailer.php',
-    '/handlers/submission-handler.php',
 ];
 
 foreach ( $files_to_include as $file ) {

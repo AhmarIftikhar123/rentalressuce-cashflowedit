@@ -51,6 +51,9 @@ const INITIAL_STATE = {
 
   // Computed results (set after Step 6)
   auditResults: null,
+
+   // Shareable URL for the admin results viewer (set alongside auditResults in Step 6)
+  resultsUrl: '',
 };
 
 export function AuditProvider( { children } ) {

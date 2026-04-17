@@ -16,15 +16,15 @@ const ButtonPrimary = ({
   type = 'button',
 }) => {
   const base =
-    'w-full py-3.5 px-4 rounded-btn text-sm font-bold tracking-wide transition-all duration-150 active:scale-[0.98] cursor-pointer';
+    'w-auto py-3.5 px-4 rounded-btn text-sm font-bold tracking-wide transition-all duration-150 active:scale-[0.98] cursor-pointer';
 
   const variants = {
     black:
-      'bg-brand-black text-brand-gold-light hover:bg-brand-black-soft disabled:bg-step-border disabled:text-audit-neutral disabled:cursor-not-allowed',
+      'bg-brand-black text-white hover:bg-brand-black-soft disabled:opacity-50 disabled:cursor-not-allowed',
     gold:
-      'bg-brand-gold text-brand-gold-light hover:bg-brand-gold-dark disabled:bg-step-border disabled:text-audit-neutral disabled:cursor-not-allowed',
+      'bg-brand-gold text-white hover:bg-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed',
     outline:
-      'bg-brand-cream border border-step-border text-brand-black hover:bg-brand-cream-dark disabled:opacity-40 disabled:cursor-not-allowed',
+      'bg-brand-cream border border-step-border text-brand-black hover:bg-brand-cream-dark disabled:opacity-50 disabled:cursor-not-allowed',
   };
 
   return (

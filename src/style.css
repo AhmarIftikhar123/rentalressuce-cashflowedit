@@ -17,13 +17,12 @@
 /* ── Smooth focus ring for all interactive elements ──────────────────────── */
 #react-root button:focus-visible,
 #react-root input:focus-visible {
-  outline: 2px solid #C9972A;
+  outline: 2px solid #56B7FF;
   outline-offset: 2px;
 }
 
 /* ── Remove Blocksy/WordPress default button styles inside the app ────────── */
 #react-root button {
   border: none;
-  background: none;
   font-family: inherit;
 }

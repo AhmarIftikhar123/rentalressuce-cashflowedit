@@ -16,20 +16,20 @@ const StatBox = ( { label, value, highlight = false } ) => (
   <div
     className={`p-4 rounded-xl text-center border transition-colors ${
       highlight
-        ? 'bg-[#FFF8E7] border-[#F0E6D2]'
-        : 'bg-[#F9F8F6] border-transparent hover:border-[#EAE7DF]'
+        ? 'bg-brand-gold-light border-brand-gold/30'
+        : 'bg-gray-50 border-transparent hover:border-step-border'
     }`}
   >
     <span
       className={`block text-[9px] uppercase tracking-widest font-bold mb-1 ${
-        highlight ? 'text-[#A67A1A]' : 'text-audit-neutral'
+        highlight ? 'text-brand-gold-dark' : 'text-audit-neutral'
       }`}
     >
       {label}
     </span>
     <span
       className={`block text-2xl font-black ${
-        highlight ? 'text-[#A67A1A]' : 'text-brand-black'
+        highlight ? 'text-brand-gold-dark' : 'text-brand-black'
       }`}
     >
       {value || '—'}
@@ -55,9 +55,9 @@ const Step1_Confirm = () => {
 
       {/* ── Notice banner — shown when garage / attic are blank ── */}
       {missingFields && (
-        <div className="flex items-start gap-3 bg-[#FFF8E7] border border-[#F0D98A] rounded-xl px-5 py-4 mb-6">
-          <span className="text-[#A67A1A] text-lg mt-0.5">⚠️</span>
-          <p className="text-sm text-[#7A5A10] font-medium leading-snug">
+        <div className="flex items-start gap-3 bg-brand-gold-light border border-brand-gold/30 rounded-xl px-5 py-4 mb-6">
+          <span className="text-brand-gold-dark text-lg mt-0.5">⚠️</span>
+          <p className="text-sm text-brand-gold-dark font-medium leading-snug">
             <strong>Almost there —</strong> your attic details are
             missing. Tap <strong>"Edit details"</strong> below to fill them in
             before continuing. These affect your rent estimate.

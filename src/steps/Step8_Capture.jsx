@@ -27,7 +27,7 @@ const TextInput = ({
     onChange={onChange}
     placeholder={placeholder}
     disabled={disabled}
-    className="w-full px-4 py-3 rounded-opt border border-step-border bg-brand-cream text-brand-black text-sm placeholder:text-audit-neutral focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold mb-4 transition-colors disabled:opacity-50"
+    className="w-full px-4 !py-4 rounded-opt border !border-[#56B7FF] bg-brand-cream text-brand-black text-sm placeholder:text-audit-neutral focus:outline-none focus:border-transparent focus:ring-1 focus:ring-step-border-active mb-4 transition-colors disabled:opacity-50"
   />
 );
 

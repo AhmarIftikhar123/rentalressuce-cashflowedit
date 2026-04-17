@@ -24,22 +24,22 @@ const CardTitle = ({ title, icon, color = "text-audit-neutral" }) => (
 
 // Strategy badge pills
 const MtrTag = () => (
-  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#E1EFFE] text-[#1E429F] text-[8px] font-black uppercase tracking-wider rounded">
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-brand-cream-dark text-[#1E429F] text-[8px] font-black uppercase tracking-wider rounded">
     Mid-term
   </span>
 );
 const StrTag = () => (
-  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#FEF3C7] text-[#92400E] text-[8px] font-black uppercase tracking-wider rounded">
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-brand-gold-light text-[#92400E] text-[8px] font-black uppercase tracking-wider rounded">
     Short-term
   </span>
 );
 const Sec8Tag = () => (
-  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#DCFCE7] text-[#166534] text-[8px] font-black uppercase tracking-wider rounded">
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-green-100 text-[#166534] text-[8px] font-black uppercase tracking-wider rounded">
     Section 8
   </span>
 );
 const RoomTag = () => (
-  <span className="ml-2 inline-block px-1.5 py-0.5 bg-[#F3E8FF] text-[#6B21A8] text-[8px] font-black uppercase tracking-wider rounded">
+  <span className="ml-2 inline-block px-1.5 py-0.5 bg-purple-100 text-[#6B21A8] text-[8px] font-black uppercase tracking-wider rounded">
     By-the-Room
   </span>
 );
@@ -73,7 +73,7 @@ const Step7_Results = () => {
   }
 
   return (
-    <div className="bg-[#F7F5F0]">
+    <div className="bg-step-bg">
       {/* 1. TOP HERO BANNER */}
       <div className="px-6 pt-6 md:px-10 md:pt-10">
         <div className="bg-gradient-to-br from-[#4D545E] to-[#2D3540] rounded-[24px] px-10 py-12 md:py-16 shadow-2xl relative overflow-hidden text-center md:text-left">
@@ -112,7 +112,7 @@ const Step7_Results = () => {
           <ValueBox label="PITI" value={fmtMonthly(r.piti)} isRed />
 
           {/* Net highlight */}
-          <div className="bg-[#F9F8F1] rounded-[24px] p-6 border border-[#E9E5DB] mt-8 flex flex-col items-center text-center">
+          <div className="bg-brand-cream rounded-[24px] p-6 border border-[#E9E5DB] mt-8 flex flex-col items-center text-center">
             <div className="w-12 h-12 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3">
               <span className="dashicons dashicons-money-alt !text-[24px] !w-6 !h-6 !flex !items-center !justify-center !leading-none" />
             </div>
@@ -155,7 +155,7 @@ const Step7_Results = () => {
           />
 
           {/* Best-case cash flow highlight */}
-          <div className="bg-gradient-to-r from-[#8B6B23] to-[#D5A737] rounded-[24px] p-6 mt-6 flex flex-col items-center text-center shadow-xl shadow-brand-gold/20">
+          <div className="bg-gradient-to-r from-brand-gold-dark to-brand-gold rounded-[24px] p-6 mt-6 flex flex-col items-center text-center shadow-xl shadow-brand-gold/20">
             <div className="w-12 h-12 rounded-full bg-white/20 text-white flex items-center justify-center mb-3">
               <span className="text-[24px] leading-none">⚡</span>
             </div>
@@ -192,7 +192,7 @@ const Step7_Results = () => {
               </div>
             </div>
 
-            <div className="h-4 bg-[#F2EFE8] rounded-full overflow-hidden w-full mb-3 shadow-inner">
+            <div className="h-4 bg-brand-cream-dark rounded-full overflow-hidden w-full mb-3 shadow-inner">
               <div
                 className="h-full bg-brand-gold rounded-full transition-all duration-1000 ease-in-out"
                 style={{
@@ -214,7 +214,7 @@ const Step7_Results = () => {
           <button
             data-viewer-hide
             onClick={() => goTo(8)}
-            className="w-full md:w-auto bg-[#3D2E14] text-[13px] font-black uppercase tracking-[0.15em] py-5 px-12 rounded-full shadow-2xl hover:bg-brand-black transition-all hover:scale-[1.05] flex items-center justify-center gap-3 active:scale-95"
+            className="w-full md:w-auto bg-brand-gold-dark text-[13px] text-white font-black uppercase tracking-[0.15em] py-5 px-12 rounded-full shadow-2xl hover:bg-brand-black transition-all hover:scale-[1.05] flex items-center justify-center gap-3 active:scale-95"
           >
             Get My Full Strategy Plan <span className="text-xl">→</span>
           </button>

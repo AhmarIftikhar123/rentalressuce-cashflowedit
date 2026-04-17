@@ -1,20 +1,20 @@
-import { useState } from '@wordpress/element';
-import { useAudit } from '../context/AuditContext';
-import { lookupProperty } from '../utils/api';
-import ButtonPrimary from '../components/ButtonPrimary';
+import { useState } from "@wordpress/element";
+import { useAudit } from "../context/AuditContext";
+import { lookupProperty } from "../utils/api";
+import ButtonPrimary from "../components/ButtonPrimary";
 
 const Step0_Address = () => {
   const { state, update, goTo } = useAudit();
-  const [loading, setLoading]   = useState(false);
-  const [error, setError]       = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLookup = async () => {
     const addr = state.address.trim();
     if (!addr) {
-      setError('Please enter a property address.');
+      setError("Please enter a property address.");
       return;
     }
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
@@ -28,14 +28,14 @@ const Step0_Address = () => {
         goTo(1.5);
       }
     } catch (err) {
-      setError(err.message ?? 'Could not find that address. Please try again.');
+      setError(err.message ?? "Could not find that address. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleKey = (e) => {
-    if (e.key === 'Enter') handleLookup();
+    if (e.key === "Enter") handleLookup();
   };
 
   return (
@@ -50,21 +50,23 @@ const Step0_Address = () => {
       <div className="relative mb-4">
         {/* Decorative Map Pin Icon */}
         <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-audit-neutral opacity-40">
-            <span className="dashicons dashicons-location-alt !text-[20px] !w-5 !h-5 !flex !items-center !justify-center !leading-none"></span>
+          <span className="dashicons dashicons-location-alt !text-[20px] !w-5 !h-5 !flex !items-center !justify-center !leading-none"></span>
         </div>
         <input
-            type="text"
-            value={state.address}
-            onChange={(e) => update({ address: e.target.value })}
-            onKeyDown={handleKey}
-            placeholder="456 Maple Ave, Nashville, TN 37201"
-            className="w-full pl-12 pr-4 py-4 rounded-xl border border-step-border bg-white shadow-sm text-brand-black text-lg placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-gold transition-all"
-            disabled={loading}
+          type="text"
+          value={state.address}
+          onChange={(e) => update({ address: e.target.value })}
+          onKeyDown={handleKey}
+          placeholder="456 Maple Ave, Nashville, TN 37201"
+          className="w-full pl-12 pr-4 !py-6 rounded-2xl border !border-[#56B7FF] bg-white shadow-sm text-brand-black text-lg placeholder:text-gray-300 transition-all focus:outline-none !focus:border-transparent !focus:border-0"
+          disabled={loading}
         />
       </div>
 
       {error && (
-        <p className="text-sm font-semibold text-audit-negative mb-4">{error}</p>
+        <p className="text-sm font-semibold text-audit-negative mb-4">
+          {error}
+        </p>
       )}
 
       <ButtonPrimary
@@ -72,7 +74,7 @@ const Step0_Address = () => {
         disabled={loading || !state.address.trim()}
         variant="gold"
       >
-        {loading ? 'Looking up property…' : 'Look up property →'}
+        {loading ? "Looking up property…" : "Look up property →"}
       </ButtonPrimary>
     </div>
   );

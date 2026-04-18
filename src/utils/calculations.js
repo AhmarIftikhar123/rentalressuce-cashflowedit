@@ -82,10 +82,10 @@ export function calcRentEstimates( property, condition ) {
   const baseLTR = Math.round( rawLTR / 50 ) * 50;
 
   // ── Apply client-specified V1 multipliers ─────────────────────────────────
-  const baseMTR  = Math.round( ( baseLTR * 1.5 ) / 50 ) * 50;  // Mid-term
-  const baseSTR  = Math.round( ( baseLTR * 1.8  ) / 50 ) * 50;  // Short-term
-  const baseSec8 = Math.round( ( baseLTR * 1.1  ) / 50 ) * 50;  // Section 8
-  const baseRoom = Math.round( ( baseLTR * 1.3  ) / 50 ) * 50;  // By-the-room
+  const baseMTR  = Math.round( ( baseLTR * 1.30 ) / 50 ) * 50;  // Mid-term
+  const baseSTR  = Math.round( ( baseLTR * 1.85 ) / 50 ) * 50;  // Short-term
+  const baseSec8 = Math.round( ( baseLTR * 1.15 ) / 50 ) * 50;  // Section 8
+  const baseRoom = Math.round( ( baseLTR * 1.60 ) / 50 ) * 50;  // By-the-room
 
   return { baseLTR, baseMTR, baseSTR, baseSec8, baseRoom };
 }

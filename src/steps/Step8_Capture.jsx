@@ -3,12 +3,6 @@ import { useAudit } from "../context/AuditContext";
 import ButtonPrimary from "../components/ButtonPrimary";
 import { submitAudit } from "../utils/api";
 
-/**
- * Step 8 — Lead capture.
- * Collects name, email, phone, goal dropdown then POSTs to WP REST → FluentCRM.
- * RingCentral SMS compliance: required phone, SMS consent checkbox (unchecked by default).
- */
-
 const FieldLabel = ({ children, required }) => (
   <label className="block text-[10px] font-semibold tracking-widest uppercase text-audit-neutral mb-1.5">
     {children}
@@ -50,9 +44,8 @@ const Step8_Capture = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
-  const [smsConsent, setSmsConsent] = useState(false); // must stay false by default — RingCentral requirement
+  const [smsConsent, setSmsConsent] = useState(false);
 
-  // ── Validation ────────────────────────────────────────────────────────────
   const phoneValid = state.leadPhone.trim().length >= 7;
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.leadEmail);
   const goalValid = !!state.leadGoal && state.leadGoal !== "";
@@ -62,9 +55,8 @@ const Step8_Capture = () => {
     emailValid &&
     phoneValid &&
     goalValid &&
-    smsConsent; // form is locked until checkbox is ticked
+    smsConsent;
 
-  // ── Submit ────────────────────────────────────────────────────────────────
   const handleSubmit = async () => {
     if (!isValid) return;
     setError("");
@@ -116,17 +108,15 @@ const Step8_Capture = () => {
           </svg>
         </div>
 
-        {/* Headline — matches client requirement */}
+        {/* Headline */}
         <h2 className="text-2xl font-bold text-brand-black mb-2">
           Your Property Audit Is In Progress
         </h2>
 
-        {/* Sub-copy — matches client requirement */}
-        <p className="text-sm text-audit-neutral mb-1 max-w-sm mx-auto leading-relaxed">
-          We'll text you shortly with your results and next steps.
-        </p>
-        <p className="text-sm text-audit-neutral mb-6 max-w-xs mx-auto leading-relaxed">
-          If you want to move faster,{" "}
+        {/* Sub-copy — email only, NO SMS mention */}
+        <p className="text-sm text-audit-neutral mb-6 max-w-sm mx-auto leading-relaxed">
+          We'll be in touch shortly with your results and next steps. If you
+          want to move faster,{" "}
           <a
             href="https://rentalrescuepm.com/contact"
             className="text-brand-gold font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity"
@@ -136,23 +126,13 @@ const Step8_Capture = () => {
           .
         </p>
 
-        {/* Sent-to confirmation */}
-        <div className="bg-step-bg border border-step-border rounded-opt px-5 py-3 inline-block mb-5">
+        {/* Sent-to confirmation — email only */}
+        <div className="bg-step-bg border border-step-border rounded-opt px-5 py-3 inline-block">
           <p className="text-[11px] text-audit-neutral mb-0.5">Audit sent to</p>
           <p className="text-sm font-semibold text-brand-black">
             {state.leadEmail}
           </p>
         </div>
-
-        {/* SMS reminder */}
-        <p className="text-lg text-audit-neutral max-w-xs mx-auto leading-relaxed">
-          📱 Keep an eye on{" "}
-          <span className="font-semibold text-brand-black">
-            {state.leadPhone}
-          </span>{" "}
-          we'll text you your results. Reply{" "}
-          <span className="font-semibold">STOP</span> at any time to opt out.
-        </p>
       </div>
     );
   }
@@ -160,7 +140,6 @@ const Step8_Capture = () => {
   // ── Form ──────────────────────────────────────────────────────────────────
   return (
     <div className="p-8 md:p-12">
-      {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <span className="text-xs font-semibold tracking-widest uppercase text-audit-neutral">
           Final step
@@ -181,7 +160,6 @@ const Step8_Capture = () => {
         and exact next steps.
       </p>
 
-      {/* Full name */}
       <FieldLabel required>Full name</FieldLabel>
       <TextInput
         value={state.leadName}
@@ -190,7 +168,6 @@ const Step8_Capture = () => {
         disabled={submitting}
       />
 
-      {/* Email */}
       <FieldLabel required>Email address</FieldLabel>
       <TextInput
         type="email"
@@ -200,7 +177,6 @@ const Step8_Capture = () => {
         disabled={submitting}
       />
 
-      {/* Goal dropdown — above phone, per client requirement */}
       <FieldLabel required>What are you looking to do?</FieldLabel>
       <div className="relative mb-0">
         <SelectInput
@@ -217,7 +193,6 @@ const Step8_Capture = () => {
         </SelectInput>
       </div>
 
-      {/* Phone */}
       <FieldLabel required>Phone number</FieldLabel>
       <TextInput
         type="tel"
@@ -229,16 +204,14 @@ const Step8_Capture = () => {
 
       {/* ── RingCentral compliance block ─────────────────────────────────── */}
       <div className="mb-0">
-        {/* Trust line — client requirement */}
         <p className="text-[11px] text-audit-neutral mb-3 leading-relaxed">
-          📲{" "}
+          🔒{" "}
           <span className="font-semibold text-brand-black">
-            We'll text you your custom Cash Flow Audit results and next steps.
+            Your information is safe and will never be shared.
           </span>{" "}
           No spam. Just data.
         </p>
 
-        {/* SMS consent checkbox — must NOT be pre-checked */}
         <label className="flex items-start gap-3 cursor-pointer group">
           <div className="relative flex-shrink-0 mt-0.5">
             <input
@@ -248,7 +221,6 @@ const Step8_Capture = () => {
               disabled={submitting}
               className="sr-only"
             />
-            {/* Custom checkbox UI */}
             <div
               className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
                 smsConsent
@@ -274,7 +246,6 @@ const Step8_Capture = () => {
             </div>
           </div>
 
-          {/* Consent text — exact language per client requirement */}
           <p className="text-[13px] mb-1 text-audit-neutral leading-relaxed">
             By submitting this form, you agree to receive text messages from{" "}
             <span className="font-semibold text-brand-black">
@@ -310,7 +281,6 @@ const Step8_Capture = () => {
 
       {error && <p className="text-xs text-audit-negative mb-3">{error}</p>}
 
-      {/* Helper text — shown when button is still locked */}
       {!isValid && !submitting && (
         <p className="text-start text-[10px] mb-1 text-audit-negative mt-2 leading-relaxed">
           {!smsConsent
@@ -319,7 +289,6 @@ const Step8_Capture = () => {
         </p>
       )}
 
-      {/* Submit — disabled until ALL fields + checkbox are valid */}
       <ButtonPrimary
         onClick={handleSubmit}
         disabled={!isValid || submitting}
@@ -327,10 +296,6 @@ const Step8_Capture = () => {
       >
         {submitting ? "Sending…" : "Get My Cash Flow Audit →"}
       </ButtonPrimary>
-
-      {/* <p className="text-center text-[11px] text-audit-neutral mt-3">
-        No spam. Just the strategy your property needs.
-      </p> */}
     </div>
   );
 };

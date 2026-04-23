@@ -10,7 +10,7 @@ const AuditContext = createContext(null);
 
 const INITIAL_STATE = {
   // Navigation
-  step: 8, // 0=address, 1=confirm, 1.5=edit, 2=condition, 3=usage
+  step: 0, // 0=address, 1=confirm, 1.5=edit, 2=condition, 3=usage
   // 4=piti, 5=loan, 6=goal, 7=results, 8=capture
 
   // Step 0
